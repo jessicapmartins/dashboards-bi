@@ -4,6 +4,8 @@ Galeria dos meus dashboards em **Power BI** e **Tableau** e de soluções de dad
 
 Todos os projetos usam dados fictícios, públicos ou de treinamento. Nenhum dado de empresa.
 
+O site do [portfólio](https://portfolio-jessica-martins.vercel.app/) é publicado na Vercel a partir da pasta [`portfolio`](portfolio).
+
 **Navegue por:** [Power BI](#power-bi) · [Tableau](#tableau) · [Soluções com IA generativa](#soluções-com-ia-generativa)
 
 ---
@@ -97,7 +99,7 @@ Documentação técnica gerada a partir do modelo de dados aberto no Power BI De
 ### Documentação do modelo Power BI de faltas · Claude + Python (TMDL)
 **Autoral.** Documentação técnica gerada por um script que lê os arquivos do projeto Power BI.
 - Arquitetura, diagrama do modelo e dicionário de 46 colunas
-- Catálogo das 17 medidas DAX e das colunas calculadas
+- Catálogo das 43 medidas DAX, organizadas em pastas
 
 [![Documentação do modelo de faltas](img/doc-faltas.jpg)](https://claude.ai/artifact/NVBMomumL2gSB1UVCS4ktG)
 
