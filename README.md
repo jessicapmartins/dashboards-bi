@@ -10,6 +10,16 @@ Todos os projetos usam dados fictícios, públicos ou de treinamento. Nenhum dad
 
 ## Power BI
 
+### Faltas em consultas · risco e próxima melhor ação
+Projeto autoral: painel de 4 páginas sobre 110 mil consultas da rede pública de Vitória (ES), ligado a um modelo de risco de falta ([código](https://github.com/jessicapmartins/previsao-faltas-consultas)).
+- Visão geral com taxa de falta por dia, antecedência, histórico e idade
+- O paradoxo do SMS: por que o efeito não pode ser medido com esta base
+- Agenda da semana com a ação recomendada para cada consulta e a economia esperada
+
+[![Painel de faltas em consultas no Power BI](img/pbi-faltas.jpg)](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9)
+
+🔗 [Abrir o dashboard interativo](https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9)
+
 ### Dashboard de campanhas de marketing
 Painel de performance de mídia paga em Facebook, Instagram, Google e LinkedIn.
 - Investimento, receita, ROI, CTR, CPC e CPA
