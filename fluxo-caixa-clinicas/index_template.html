@@ -1,0 +1,306 @@
+<title>Clínicas Aurora · Fluxo de Caixa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: painel de gestão de uma rede de clínicas — filtros no topo, KPIs, gráficos em grade, DRE e simulador */
+:root{
+  --bg:#F2F6F5; --surface:#FFFFFF; --ink:#10231F; --muted:#5A6E69; --line:#DCE5E2;
+  --rev:#0B7A6B; --rev-soft:#D7EEEA; --loss:#D9573B; --loss-soft:#F9E1DA; --cost:#7C8B9E; --warn:#C98A1F;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C1614; --surface:#13201D; --ink:#E4EFEC; --muted:#93A8A2; --line:#24342F;
+  --rev:#2DB39E; --rev-soft:#173A34; --loss:#F07A5E; --loss-soft:#3D221B; --cost:#8EA0B5; --warn:#E2A33B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C1614; --surface:#13201D; --ink:#E4EFEC; --muted:#93A8A2; --line:#24342F;
+  --rev:#2DB39E; --rev-soft:#173A34; --loss:#F07A5E; --loss-soft:#3D221B; --cost:#8EA0B5; --warn:#E2A33B; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:clamp(16px,3vw,32px);padding-block:24px 48px;display:grid;gap:20px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:700}
+h2{font-size:1.08rem;font-weight:700}
+p{margin:0}
+.muted{color:var(--muted)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+.brand{display:grid;gap:6px;min-width:0}
+.brand .eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--rev)}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;padding:6px 12px;border-radius:999px;border:1px dashed var(--warn);color:var(--warn);white-space:nowrap}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn)}
+.filters{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:500 .88rem var(--body);padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--rev);border-color:var(--rev);color:var(--surface)}
+.seg button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--rev);outline-offset:2px}
+.flab{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.range{display:flex;align-items:center;gap:8px}
+select{font:500 .88rem var(--body);padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:4px;min-width:0}
+.kpi .lab{font-size:.8rem;color:var(--muted)}
+.kpi .val{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1.45rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi .sub{font-size:.78rem;color:var(--muted)}
+.kpi.loss{background:var(--loss-soft);border-color:transparent}
+.kpi.loss .val{color:var(--loss)}
+.kpi.good .val{color:var(--rev)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:10px;align-content:start;min-width:0}
+.panel header{display:grid;gap:2px}
+.panel header p{font-size:.86rem;color:var(--muted)}
+.s7{grid-column:span 7}.s5{grid-column:span 5}.s6{grid-column:span 6}.s12{grid-column:span 12}
+@media (max-width:900px){.s7,.s5,.s6{grid-column:span 12}}
+.chart{position:relative;height:280px}
+.chart.tall{height:300px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+.tbl{overflow-x:auto}
+td,th{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+td:first-child,th:first-child{text-align:left;white-space:normal}
+th{font-size:.76rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+tr.tot td{font-weight:600;border-bottom:2px solid var(--ink)}
+tr.neg td:not(:first-child){color:var(--muted)}
+tr.hl td{background:var(--loss-soft)}
+.heat{display:grid;grid-template-columns:auto repeat(6,minmax(0,1fr));gap:4px;font-size:.82rem}
+.heat .h{color:var(--muted);text-align:center;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em}
+.heat .r{color:var(--muted);align-self:center;padding-right:6px}
+.heat .c{border-radius:6px;padding:10px 4px;text-align:center;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.sim{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+@media (max-width:700px){.sim{grid-template-columns:1fr}}
+.ctrl{display:grid;gap:4px}
+.ctrl label{display:flex;justify-content:space-between;font-size:.88rem}
+input[type=range]{width:100%;accent-color:var(--rev)}
+.out{display:grid;gap:8px;align-content:start}
+.out .row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.out .row.big{border-bottom:0;padding-top:12px}
+.out .row.big .num{font-size:1.5rem;color:var(--rev)}
+.note{font-size:.84rem;color:var(--muted);max-width:75ch}
+footer{display:grid;gap:6px;font-size:.84rem;color:var(--muted)}
+footer a{color:var(--rev)}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">Fluxo de caixa · 2025</span>
+      <h1>Clínicas Aurora</h1>
+      <p class="muted">Rede fictícia de três clínicas. Quanto entra, quanto sai e quanto as faltas custam por mês.</p>
+    </div>
+    <span class="badge">Dados sintéticos · empresa fictícia</span>
+  </header>
+
+  <section class="filters" aria-label="Filtros">
+    <span class="flab">Unidade</span>
+    <div class="seg" id="unidades" role="group" aria-label="Unidade"></div>
+    <span class="flab">Período</span>
+    <div class="range">
+      <select id="mesIni" aria-label="Mês inicial"></select><span class="muted">a</span>
+      <select id="mesFim" aria-label="Mês final"></select>
+    </div>
+  </section>
+
+  <section class="kpis" aria-label="Indicadores">
+    <div class="kpi good"><span class="lab">Receita líquida</span><span class="val" id="kRec"></span><span class="sub" id="kRecSub"></span></div>
+    <div class="kpi"><span class="lab">Despesas</span><span class="val" id="kDesp"></span><span class="sub">repasse médico, insumos e fixos</span></div>
+    <div class="kpi good"><span class="lab">Resultado</span><span class="val" id="kRes"></span><span class="sub" id="kMarg"></span></div>
+    <div class="kpi"><span class="lab">Taxa de falta</span><span class="val" id="kTaxa"></span><span class="sub" id="kFaltas"></span></div>
+    <div class="kpi loss"><span class="lab">Receita perdida com faltas</span><span class="val" id="kPerda"></span><span class="sub" id="kPerdaSub"></span></div>
+    <div class="kpi loss"><span class="lab">Margem perdida com faltas</span><span class="val" id="kMargP"></span><span class="sub">já descontados repasse e insumos</span></div>
+  </section>
+
+  <section class="grid">
+    <article class="panel s7">
+      <header><h2>Receita, despesas e resultado por mês</h2><p>Janeiro, julho e dezembro têm agenda mais vazia e mais faltas.</p></header>
+      <div class="chart"><canvas id="cFluxo" aria-label="Gráfico de receita, despesas e resultado por mês"></canvas></div>
+    </article>
+    <article class="panel s5">
+      <header><h2>O custo das faltas por mês</h2><p>Receita que deixou de entrar (barras) e taxa de falta (linha).</p></header>
+      <div class="chart"><canvas id="cPerda" aria-label="Gráfico da receita perdida com faltas por mês"></canvas></div>
+    </article>
+    <article class="panel s6">
+      <header><h2>Demonstrativo do período</h2><p>DRE simplificada, em reais.</p></header>
+      <div class="tbl"><table id="dre"></table></div>
+    </article>
+    <article class="panel s6">
+      <header><h2>Faltas por especialidade</h2><p>Taxa de falta e receita perdida no período.</p></header>
+      <div class="chart tall"><canvas id="cEsp" aria-label="Gráfico de faltas por especialidade"></canvas></div>
+    </article>
+    <article class="panel s5">
+      <header><h2>Onde e quando se falta mais</h2><p>Taxa de falta por unidade e dia da semana.</p></header>
+      <div class="heat" id="heat"></div>
+    </article>
+    <article class="panel s7">
+      <header><h2>Simulador: quanto vale reduzir as faltas</h2><p>Premissas ajustáveis, inspiradas na regra de próxima melhor ação do projeto de previsão de faltas.</p></header>
+      <div class="sim">
+        <div style="display:grid;gap:14px">
+          <div class="ctrl"><label for="sRed"><span>Redução das faltas</span><span class="num" id="vRed"></span></label><input type="range" id="sRed" min="0" max="40" step="1" value="15"></div>
+          <div class="ctrl"><label for="sCob"><span>Consultas contatadas</span><span class="num" id="vCob"></span></label><input type="range" id="sCob" min="10" max="100" step="5" value="40"></div>
+          <div class="ctrl"><label for="sCusto"><span>Custo médio por contato</span><span class="num" id="vCusto"></span></label><input type="range" id="sCusto" min="0.25" max="5" step="0.25" value="1.5"></div>
+          <p class="note">Contatar só as consultas de maior risco (por exemplo, 40%) concentra o esforço onde estão as faltas. O efeito real precisa ser medido com um teste A/B.</p>
+        </div>
+        <div class="out">
+          <div class="row"><span>Faltas evitadas</span><span class="num" id="oFaltas"></span></div>
+          <div class="row"><span>Margem recuperada</span><span class="num" id="oMargem"></span></div>
+          <div class="row"><span>Custo dos contatos</span><span class="num" id="oCusto"></span></div>
+          <div class="row big"><span>Ganho líquido no período</span><span class="num" id="oLiq"></span></div>
+          <p class="note" id="oNota"></p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <p><strong>Como os dados foram feitos.</strong> Tudo é sintético, gerado por um script Python com semente fixa: 3 unidades, 6 especialidades, 303 dias úteis de 2025. A taxa de falta foi calibrada pela base real de 110 mil consultas do projeto de previsão de faltas (20,2%). Convênio paga 75% da tabela (70% das consultas), o repasse médico é de 45% da receita líquida e os insumos custam R$ 7 por consulta.</p>
+    <p>Projeto autoral de Jéssica Martins · <a href="https://github.com/jessicapmartins/dashboards-bi/tree/main/fluxo-caixa-clinicas" target="_blank" rel="noopener">código e dados no GitHub</a> · <a href="https://github.com/jessicapmartins/previsao-faltas-consultas" target="_blank" rel="noopener">projeto de previsão de faltas</a></p>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const D = /*DATA*/null;
+const MESES = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+const DIAS = ['Seg','Ter','Qua','Qui','Sex','Sáb'];
+const UNIDADES = ['Todas','Centro','Zona Norte','Litoral'];
+const st = {un:'Todas', ini:1, fim:12};
+
+const brl = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0});
+const brlK = v => Math.abs(v) >= 1e6 ? 'R$ ' + (v/1e6).toLocaleString('pt-BR',{maximumFractionDigits:2}) + ' mi'
+                : 'R$ ' + (v/1e3).toLocaleString('pt-BR',{maximumFractionDigits:0}) + ' mil';
+const pct = v => (v*100).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1}) + '%';
+const int = v => Math.round(v).toLocaleString('pt-BR');
+const tok = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+const okU = u => st.un === 'Todas' || u === st.un;
+const okM = m => m >= st.ini && m <= st.fim;
+const rows = () => D.mensal.filter(r => okU(r.unidade) && okM(r.mes));
+const fixRows = () => D.fixos.filter(r => okU(r.unidade) && okM(r.mes));
+const sum = (a,k) => a.reduce((s,r) => s + r[k], 0);
+const fixTotal = r => r.adm + r.aluguel + r.servicos + r.marketing + r.sistemas;
+
+// ---------- filtros
+const segEl = document.getElementById('unidades');
+UNIDADES.forEach(u => {
+  const b = document.createElement('button'); b.type='button'; b.textContent=u; b.id='u-'+u.replace(' ','-');
+  b.setAttribute('aria-pressed', u===st.un);
+  b.onclick = () => { st.un=u; [...segEl.children].forEach(x => x.setAttribute('aria-pressed', x===b)); render(); };
+  segEl.appendChild(b);
+});
+const ini = document.getElementById('mesIni'), fim = document.getElementById('mesFim');
+MESES.forEach((m,i) => { ini.add(new Option(m+'/25', i+1)); fim.add(new Option(m+'/25', i+1)); });
+ini.value=1; fim.value=12;
+ini.onchange = () => { st.ini=+ini.value; if (st.fim<st.ini){st.fim=st.ini; fim.value=st.fim;} render(); };
+fim.onchange = () => { st.fim=+fim.value; if (st.ini>st.fim){st.ini=st.fim; ini.value=st.ini;} render(); };
+['sRed','sCob','sCusto'].forEach(id => document.getElementById(id).addEventListener('input', sim));
+
+// ---------- gráficos
+let charts = {};
+function baseOpts(){
+  const ink = tok('--muted'), line = tok('--line');
+  Chart.defaults.font.family = tok('--body'); Chart.defaults.color = ink;
+  return {responsive:true, maintainAspectRatio:false, animation:{duration:300},
+    plugins:{legend:{position:'top',align:'start',labels:{boxWidth:10,boxHeight:10,usePointStyle:true}},
+             tooltip:{callbacks:{}}},
+    scales:{x:{grid:{display:false},border:{color:line}}, y:{grid:{color:line},border:{display:false}}}};
+}
+function mk(id, cfg){ if (charts[id]) charts[id].destroy(); charts[id] = new Chart(document.getElementById(id), cfg); }
+
+function render(){
+  const R = rows(), F = fixRows();
+  const rec = sum(R,'receita_liquida'), rep = sum(R,'repasse_medico'), ins = sum(R,'insumos');
+  const fix = F.reduce((s,r)=>s+fixTotal(r),0), desp = rep+ins+fix, res = rec-desp;
+  const ag = sum(R,'agendadas'), fa = sum(R,'faltas'), perda = sum(R,'receita_perdida'), margP = sum(R,'margem_perdida');
+  const nMes = st.fim-st.ini+1;
+  document.getElementById('kRec').textContent = brlK(rec);
+  document.getElementById('kRecSub').textContent = int(ag-fa)+' consultas realizadas';
+  document.getElementById('kDesp').textContent = brlK(desp);
+  document.getElementById('kRes').textContent = brlK(res);
+  document.getElementById('kMarg').textContent = 'margem de '+pct(res/rec);
+  document.getElementById('kTaxa').textContent = pct(fa/ag);
+  document.getElementById('kFaltas').textContent = int(fa)+' faltas em '+int(ag)+' agendamentos';
+  document.getElementById('kPerda').textContent = brlK(perda);
+  document.getElementById('kPerdaSub').textContent = brlK(perda/nMes)+' por mês · '+pct(perda/(rec+perda))+' do potencial';
+  document.getElementById('kMargP').textContent = brlK(margP);
+
+  // por mês
+  const ms = []; for (let m=st.ini; m<=st.fim; m++) ms.push(m);
+  const byM = (k, src=R) => ms.map(m => src.filter(r=>r.mes===m).reduce((s,r)=>s+r[k],0));
+  const recM = byM('receita_liquida'), varM = ms.map((m,i)=>byM('repasse_medico')[i]+byM('insumos')[i]);
+  const fixM = ms.map(m => F.filter(r=>r.mes===m).reduce((s,r)=>s+fixTotal(r),0));
+  const despM = varM.map((v,i)=>v+fixM[i]), resM = recM.map((v,i)=>v-despM[i]);
+  const o1 = baseOpts();
+  o1.scales.y.ticks = {callback:v=>brlK(v)};
+  o1.plugins.tooltip.callbacks.label = c => c.dataset.label+': '+brl(c.parsed.y);
+  mk('cFluxo',{data:{labels:ms.map(m=>MESES[m-1]),datasets:[
+    {type:'bar',label:'Receita líquida',data:recM,backgroundColor:tok('--rev'),borderRadius:4,order:2},
+    {type:'bar',label:'Despesas',data:despM,backgroundColor:tok('--cost'),borderRadius:4,order:3},
+    {type:'line',label:'Resultado',data:resM,borderColor:tok('--warn'),backgroundColor:tok('--warn'),borderWidth:3,pointRadius:3,tension:.3,order:1}]},options:o1});
+
+  const perdaM = byM('receita_perdida'), taxaM = ms.map((m,i)=>byM('faltas')[i]/byM('agendadas')[i]);
+  const o2 = baseOpts();
+  o2.scales.y.ticks = {callback:v=>brlK(v)};
+  o2.scales.y2 = {position:'right',grid:{display:false},border:{display:false},ticks:{callback:v=>pct(v)},suggestedMin:.15,suggestedMax:.26};
+  o2.plugins.tooltip.callbacks.label = c => c.dataset.yAxisID==='y2' ? 'Taxa de falta: '+pct(c.parsed.y) : 'Receita perdida: '+brl(c.parsed.y);
+  mk('cPerda',{data:{labels:ms.map(m=>MESES[m-1]),datasets:[
+    {type:'line',label:'Taxa de falta',data:taxaM,yAxisID:'y2',borderColor:tok('--ink'),backgroundColor:tok('--ink'),borderWidth:2,pointRadius:2,tension:.3,order:1},
+    {type:'bar',label:'Receita perdida',data:perdaM,backgroundColor:tok('--loss'),borderRadius:4,order:2}]},options:o2});
+
+  // especialidades
+  const esps = [...new Set(D.mensal.map(r=>r.especialidade))].map(e => {
+    const E = R.filter(r=>r.especialidade===e); return {e, taxa:sum(E,'faltas')/sum(E,'agendadas'), perda:sum(E,'receita_perdida')};
+  }).sort((a,b)=>b.perda-a.perda);
+  const o3 = baseOpts();
+  o3.indexAxis='y'; o3.plugins.legend.display=false;
+  o3.scales = {x:{grid:{color:tok('--line')},border:{display:false},ticks:{callback:v=>brlK(v)}}, y:{grid:{display:false},border:{color:tok('--line')}}};
+  o3.plugins.tooltip.callbacks.label = c => ['Receita perdida: '+brl(c.parsed.x), 'Taxa de falta: '+pct(esps[c.dataIndex].taxa)];
+  mk('cEsp',{type:'bar',data:{labels:esps.map(x=>x.e+' · '+pct(x.taxa)),datasets:[{data:esps.map(x=>x.perda),backgroundColor:tok('--loss'),borderRadius:4}]},options:o3});
+
+  // DRE
+  const bruta = sum(R,'receita_bruta'), desc = bruta-rec, margC = rec-rep-ins;
+  const fx = k => F.reduce((s,r)=>s+r[k],0);
+  const lines = [
+    ['Receita bruta (tabela)', bruta, ''], ['(−) Desconto de convênios', -desc, 'neg'], ['Receita líquida', rec, 'tot'],
+    ['(−) Repasse médico', -rep, 'neg'], ['(−) Insumos', -ins, 'neg'], ['Margem de contribuição', margC, 'tot'],
+    ['(−) Equipe administrativa', -fx('adm'), 'neg'], ['(−) Aluguel', -fx('aluguel'), 'neg'],
+    ['(−) Energia e serviços', -fx('servicos'), 'neg'], ['(−) Marketing', -fx('marketing'), 'neg'], ['(−) Sistemas', -fx('sistemas'), 'neg'],
+    ['Resultado', res, 'tot'], ['Receita que as faltas tiraram', perda, 'hl']];
+  document.getElementById('dre').innerHTML = '<thead><tr><th>Linha</th><th>R$</th><th>% da receita líquida</th></tr></thead><tbody>' +
+    lines.map(([n,v,c]) => `<tr class="${c}"><td>${n}</td><td class="num">${brl(v)}</td><td class="num">${pct(v/rec)}</td></tr>`).join('') + '</tbody>';
+
+  // mapa de calor
+  const W = D.semana.filter(r => okM(r.mes));
+  const uns = st.un==='Todas' ? ['Centro','Zona Norte','Litoral'] : [st.un];
+  const cells = uns.map(u => DIAS.map((d,i) => { const X = W.filter(r=>r.unidade===u && r.dia_semana===i); return sum(X,'faltas')/sum(X,'agendadas'); }));
+  const flat = cells.flat(), lo = Math.min(...flat), hi = Math.max(...flat);
+  const heat = document.getElementById('heat');
+  heat.innerHTML = '<span></span>' + DIAS.map(d=>`<span class="h">${d}</span>`).join('') +
+    uns.map((u,j) => `<span class="r">${u}</span>` + cells[j].map(v => {
+      const t = hi>lo ? (v-lo)/(hi-lo) : .5;
+      return `<span class="c" style="background:color-mix(in srgb, var(--loss) ${Math.round(12+t*70)}%, var(--surface));color:${t>.55?'var(--surface)':'var(--ink)'}">${pct(v)}</span>`;
+    }).join('')).join('');
+  sim();
+}
+
+function sim(){
+  const R = rows();
+  const red = +document.getElementById('sRed').value/100, cob = +document.getElementById('sCob').value/100, custo = +document.getElementById('sCusto').value;
+  document.getElementById('vRed').textContent = Math.round(red*100)+'%';
+  document.getElementById('vCob').textContent = Math.round(cob*100)+'%';
+  document.getElementById('vCusto').textContent = 'R$ '+custo.toLocaleString('pt-BR',{minimumFractionDigits:2});
+  const fa = sum(R,'faltas'), ag = sum(R,'agendadas'), margPorFalta = sum(R,'margem_perdida')/fa;
+  const evit = fa*red, ganho = evit*margPorFalta, cst = ag*cob*custo, liq = ganho-cst;
+  document.getElementById('oFaltas').textContent = int(evit);
+  document.getElementById('oMargem').textContent = brl(ganho);
+  document.getElementById('oCusto').textContent = '− '+brl(cst);
+  const o = document.getElementById('oLiq'); o.textContent = brl(liq); o.style.color = liq>=0 ? 'var(--rev)' : 'var(--loss)';
+  document.getElementById('oNota').textContent = liq>=0
+    ? `Cada falta evitada devolve ${brl(margPorFalta)} de margem. Com essas premissas, os contatos se pagam.`
+    : `Com essas premissas, o custo dos contatos supera a margem recuperada. Contate menos consultas ou reduza o custo por contato.`;
+}
+
+render();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+</script>
