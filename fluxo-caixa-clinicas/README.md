@@ -31,4 +31,4 @@ python montar_painel.py    # injeta os dados e gera index.html
 `index.html` é um arquivo único (HTML + Chart.js). Para publicar na Vercel: **Add New → Project → importar o repositório `dashboards-bi` → Root Directory `fluxo-caixa-clinicas` → Framework "Other" → Deploy**.
 
 ---
-Jéssica Priscila de Oliveira Martins · [Portfólio](https://claude.ai/artifact/YPyaaqo16QuwKBKGw9VF5m)
+Jéssica Priscila de Oliveira Martins · [Portfólio](https://portfolio-jessica-martins.vercel.app/)
