@@ -253,7 +253,7 @@ function render(){
   }).sort((a,b)=>b.perda-a.perda);
   const o3 = baseOpts();
   o3.indexAxis='y'; o3.plugins.legend.display=false;
-  o3.scales = {x:{grid:{color:tok('--line')},border:{display:false},ticks:{callback:v=>brlK(v)}}, y:{grid:{display:false},border:{color:tok('--line')}}};
+  o3.scales = {x:{grid:{color:tok('--line')},border:{display:false},ticks:{callback:v=>brlK(v),maxRotation:0,maxTicksLimit:5}}, y:{grid:{display:false},border:{color:tok('--line')}}};
   o3.plugins.tooltip.callbacks.label = c => ['Receita perdida: '+brl(c.parsed.x), 'Taxa de falta: '+pct(esps[c.dataIndex].taxa)];
   mk('cEsp',{type:'bar',data:{labels:esps.map(x=>x.e+' · '+pct(x.taxa)),datasets:[{data:esps.map(x=>x.perda),backgroundColor:tok('--loss'),borderRadius:4}]},options:o3});
 
