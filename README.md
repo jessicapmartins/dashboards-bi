@@ -44,6 +44,16 @@ Documentação técnica gerada a partir do modelo de dados aberto no Power BI De
 
 ## Tableau
 
+### Segmentação de clientes de e-commerce (Olist)
+Painel final do projeto [segmentacao-clientes-olist](https://github.com/jessicapmartins/segmentacao-clientes-olist), com 93 mil clientes reais e anonimizados da Olist segmentados por RFM + K-Means.
+- Cartões de KPI: clientes, receita, valor médio, taxa de recompra e nota média
+- Participação de cada segmento em clientes e em receita, mapa por estado e receita mensal por segmento
+- Ação de CRM recomendada por segmento, com filtros de segmento e estado
+
+[![Painel de segmentação de clientes no Tableau](https://public.tableau.com/static/images/Da/Dash-Olist/PainelOlist-Segmentaodeclientes/1.png)](https://public.tableau.com/views/Dash-Olist/PainelOlist-Segmentaodeclientes)
+
+🔗 [Abrir no Tableau Public](https://public.tableau.com/views/Dash-Olist/PainelOlist-Segmentaodeclientes)
+
 ### Vendas e lucro por categoria, subcategoria e produto
 Painel com a base pública *Superstore*.
 
