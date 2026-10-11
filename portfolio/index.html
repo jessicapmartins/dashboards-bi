@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Portfólio Jéssica Martins</title>
+<meta name="description" content="Portfólio de Jéssica Martins: mais de 10 anos em dados, BI, Machine Learning e IA aplicada. Cases profissionais, dashboards em Power BI e Tableau, projetos com IA generativa e código no GitHub.">
+<meta property="og:title" content="Portfólio Jéssica Martins">
+<meta property="og:description" content="Dados, Machine Learning e IA aplicada: cases, dashboards e projetos com código aberto.">
+<meta property="og:type" content="website">
+<style>html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lighthouse beam opens the page and points right; below, a column of work read top to bottom.
+   One deliberate dark look, matching the LinkedIn cover. */
+:root{
+  color-scheme:dark;
+  --night:#07111F;      /* page ground */
+  --deep:#0C1D2E;       /* raised surfaces */
+  --line:#1C3347;       /* hairlines */
+  --ink:#EEF4F8;        /* primary text */
+  --mist:#9FB3C8;       /* secondary text */
+  --beam:#5EEAD4;       /* accent: the light */
+  --c2:#A78BFA;         /* cluster violet */
+  --c3:#FBBF24;         /* cluster amber */
+  --display:"Sora",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --step-0:1rem; --step-1:1.15rem; --step-2:1.45rem; --step-3:clamp(1.7rem,3.2vw,2.3rem); --step-4:clamp(2.2rem,5.6vw,3.9rem);
+}
+*{box-sizing:border-box}
+body{background:var(--night);color:var(--ink);font-family:var(--body);font-size:var(--step-0);line-height:1.6;-webkit-font-smoothing:antialiased;padding-inline:clamp(16px,4vw,48px);padding-block:0 72px}
+.wrap{max-width:1120px;margin:0 auto}
+a{color:var(--beam);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--beam);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.015em}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--beam)}
+.muted{color:var(--mist)}
+
+/* hero */
+.hero{position:relative;padding-block:72px 56px;display:grid;gap:22px;overflow:hidden}
+.beam{position:absolute;inset:0;pointer-events:none;z-index:0}
+.beam::before{content:"";position:absolute;left:-40px;top:38px;width:min(980px,120%);height:300px;
+  background:linear-gradient(90deg,rgba(159,245,230,.32),rgba(94,234,212,.08) 55%,rgba(94,234,212,0) 80%);
+  clip-path:polygon(0 18%,100% 0,100% 100%);}
+.beam::after{content:"";position:absolute;left:-58px;top:52px;width:76px;height:76px;border-radius:50%;
+  background:radial-gradient(circle,rgba(230,255,250,.95),rgba(94,234,212,0) 70%)}
+.hero > *:not(.beam){position:relative;z-index:1}
+.name{font-family:var(--display);font-weight:600;font-size:var(--step-1);color:var(--ink)}
+.hero h1{font-size:var(--step-4);font-weight:600;line-height:1.05;max-width:16ch}
+.hero .lede{font-size:var(--step-1);color:var(--mist);max-width:60ch}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-weight:600;font-size:.95rem;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--deep)}
+.btn.primary{background:var(--beam);color:var(--night);border-color:var(--beam)}
+.btn:hover{border-color:var(--beam)}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:10px}
+.fact{background:var(--night);padding:18px 20px;display:grid;gap:2px}
+.fact b{font-family:var(--display);font-weight:600;font-size:var(--step-2)}
+.fact span{color:var(--mist);font-size:.92rem}
+
+/* sections */
+section{padding-block:56px 8px;scroll-margin-top:24px}
+.sec-head{display:grid;gap:10px;margin-bottom:28px;max-width:70ch}
+.sec-head h2{font-size:var(--step-3);font-weight:600}
+.sec-head p{color:var(--mist)}
+
+/* professional cases: problem → approach → result, a true sequence */
+.cases{display:grid;gap:18px}
+.case{border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:grid;gap:16px;background:var(--deep)}
+.case-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 18px}
+.case h3{font-size:var(--step-2);font-weight:600}
+.where{font-family:var(--mono);font-size:.8rem;color:var(--mist)}
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.flow div{display:grid;gap:6px;align-content:start;min-width:0}
+.flow dt{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase}
+.flow dt.p{color:var(--c3)} .flow dt.a{color:var(--c2)} .flow dt.r{color:var(--beam)}
+.flow dd{margin:0;color:var(--ink);font-size:.97rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:.76rem;padding:3px 9px;border-radius:6px;border:1px solid var(--line);color:var(--mist)}
+
+/* lab projects */
+.projects{display:grid;gap:44px}
+.proj{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:center}
+.proj:nth-child(even) .shot{order:2}
+.shot{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--deep);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.shot img{display:block;width:100%;height:auto}
+.proj-text{display:grid;gap:12px;min-width:0}
+.proj-text h3{font-size:var(--step-2);font-weight:600}
+.proj-text p{color:var(--mist)}
+.proj-text .made{font-family:var(--mono);font-size:.8rem;color:var(--beam)}
+.proj-text ul{margin:0;padding-left:18px;display:grid;gap:4px;color:var(--ink);font-size:.95rem}
+.note{font-size:.84rem;color:var(--mist);border-left:2px solid var(--c3);padding-left:10px}
+.proj-links{display:flex;flex-wrap:wrap;gap:10px}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.stack > div{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px;align-content:start}
+.stack h3{font-size:1.02rem;font-weight:600}
+
+/* education */
+.edu{display:grid;gap:0;border-top:1px solid var(--line)}
+.edu-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+.edu-row time{font-family:var(--mono);font-size:.85rem;color:var(--mist);font-variant-numeric:tabular-nums}
+.edu-row b{font-weight:600}
+.edu-row span{color:var(--mist);display:block;font-size:.93rem}
+
+footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
+footer p{color:var(--mist);font-size:.9rem}
+
+
+/* hero photo */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px 40px;align-items:center}
+.hero-text{display:grid;gap:22px;min-width:0}
+.avatar{width:clamp(180px,22vw,240px);height:auto;aspect-ratio:1;justify-self:center;border-radius:50%;object-fit:cover;border:2px solid var(--beam);box-shadow:0 0 0 8px rgba(94,234,212,.08),0 24px 60px rgba(0,0,0,.45)}
+
+/* code & ML repos */
+.code-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px}
+.repo{border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:var(--deep);display:grid;gap:14px;align-content:start}
+.repo h3{font-size:var(--step-2);font-weight:600}
+.repo p{color:var(--mist)}
+.metrics{display:flex;flex-wrap:wrap;gap:10px}
+.metric{border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:grid;gap:0;background:var(--night)}
+.metric b{font-family:var(--display);font-size:var(--step-2);font-weight:600;color:var(--beam);font-variant-numeric:tabular-nums}
+.metric span{font-size:.8rem;color:var(--mist)}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--mono);font-size:.76rem;color:var(--mist)}
+.steps i{font-style:normal;color:var(--beam)}
+.repo.soon{border-style:dashed;background:transparent}
+
+@media (max-width:820px){
+  .hero-grid{grid-template-columns:1fr}
+  .avatar{order:-1;width:132px;justify-self:start}
+  .proj{grid-template-columns:1fr}
+  .proj:nth-child(even) .shot{order:0}
+  .flow{grid-template-columns:1fr}
+  .edu-row{grid-template-columns:1fr;gap:4px}
+  .hero{padding-block:48px 40px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .beam::before{animation:sweep 1.4s ease-out both}
+  @keyframes sweep{from{opacity:.35;transform:scaleX(.85);transform-origin:left}to{opacity:1;transform:none}}
+}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 32px}
+.tabs button{font:600 .95rem var(--body);padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--deep);color:var(--mist);cursor:pointer}
+.tabs button span{font-family:var(--mono);font-size:.75rem;opacity:.7;margin-left:4px}
+.tabs button[aria-selected="true"]{background:var(--beam);border-color:var(--beam);color:var(--night)}
+.tabs button:focus-visible,.more-btn:focus-visible{outline:2px solid var(--beam);outline-offset:3px}
+.js .proj.more{display:none}
+.js .tabpanel.open .proj.more{display:grid}
+.more-btn{margin-top:32px;cursor:pointer;font-family:var(--body)}
+.origin{justify-self:start;font-family:var(--mono);font-size:.72rem;padding:3px 9px;border-radius:999px;border:1px solid}
+.origin.own{color:var(--beam);border-color:var(--beam)}
+.origin.wk{color:var(--c2);border-color:var(--c2)}
+.origin.tut{color:var(--c3);border-color:var(--c3)}
+.shot.ph{aspect-ratio:16/9;display:grid;place-items:center;background:linear-gradient(135deg,var(--deep),#11283d)}
+.shot.ph div{display:grid;gap:6px;text-align:center;padding:20px}
+.shot.ph b{font-family:var(--mono);font-size:.8rem;color:var(--beam);font-weight:500}
+.shot.ph span{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="beam" aria-hidden="true"></div>
+  <div class="hero-grid">
+  <div class="hero-text">
+  <p class="name">Jéssica Priscila de Oliveira Martins</p>
+  <p class="eyebrow">Dados · Machine Learning · IA aplicada</p>
+  <h1>Transformo dados em decisões de negócio</h1>
+  <p class="lede">Profissional de dados há mais de 10 anos. Combino BI, estatística e Machine Learning com visão comercial e, mais recentemente, uso IA generativa para construir e publicar soluções de dados. Aqui estão casos do meu trabalho e projetos que desenvolvi.</p>
+  <div class="links">
+    <a class="btn primary" href="https://www.linkedin.com/in/jessica-oliveira-martins/" target="_blank" rel="noopener">Ver perfil no LinkedIn</a>
+    <a class="btn" href="#projetos">Ver projetos</a>
+    <a class="btn" href="https://github.com/jessicapmartins" target="_blank" rel="noopener">Ver código no GitHub</a>
+  </div>
+  </div>
+  <img class="avatar" src="img/foto-perfil.jpg" alt="Foto de Jéssica Martins" width="480" height="480">
+  </div>
+  <div class="facts">
+    <div class="fact"><b>+10 anos</b><span>em BI, analytics e dados</span></div>
+    <div class="fact"><b>Saúde · Fintech · Varejo</b><span>setores em que atuei</span></div>
+    <div class="fact"><b>Pós em Analytics e IA</b><span>Data Science · FIA Business School</span></div>
+  </div>
+</header>
+
+<section id="cases">
+  <div class="sec-head">
+    <p class="eyebrow">Experiência</p>
+    <h2>Cases profissionais</h2>
+    <p>Projetos reais, descritos sem dados confidenciais das empresas.</p>
+  </div>
+  <div class="cases">
+    <article class="case">
+      <div class="case-top"><h3>Segmentação comportamental de médicos</h3><span class="where">Indústria farmacêutica multinacional · 2026</span></div>
+      <dl class="flow">
+        <div><dt class="p">Problema</dt><dd>Aumentar o alcance e a qualidade da interação com médicos em uma área terapêutica de alta competitividade.</dd></div>
+        <div><dt class="a">Abordagem</dt><dd>Desenhei uma segmentação baseada em regras de negócio e análise de comportamento, combinando recência, frequência e valor das interações por canal, e cruzei esse comportamento com o potencial de prescrição.</dd></div>
+        <div><dt class="r">Resultado</dt><dd>A segmentação passou a orientar a reestruturação das comunicações, contribuiu para aumentar o engajamento e foi expandida para outras áreas terapêuticas. Hoje é usada como referência por outras unidades da empresa.</dd></div>
+      </dl>
+      <div class="tags"><span class="tag">Segmentação RFM</span><span class="tag">Regras de negócio</span><span class="tag">Snowflake</span><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Customer Engagement</span></div>
+    </article>
+
+    <article class="case">
+      <div class="case-top"><h3>Next Best Channel: recomendação de canal e mensagem</h3><span class="where">Indústria farmacêutica multinacional · 2024–2025</span></div>
+      <dl class="flow">
+        <div><dt class="p">Problema</dt><dd>Indicar aos representantes o melhor canal e a melhor mensagem para o próximo contato com cada médico.</dd></div>
+        <div><dt class="a">Minha contribuição</dt><dd>Mapeei e estruturei as bases de engajamento e comunicação que alimentaram o modelo, definindo com o time de ciência de dados quais sinais de comportamento usar. O time desenvolveu o modelo de recomendação (KNN e XGBoost).</dd></div>
+        <div><dt class="r">Resultado</dt><dd>O modelo foi implementado e passou a recomendar o próximo canal e a próxima mensagem, apoiando a evolução para uma estratégia omnichannel.</dd></div>
+      </dl>
+      <div class="tags"><span class="tag">Preparação de dados para ML</span><span class="tag">Omnichannel</span><span class="tag">SQL</span><span class="tag">Scrum</span></div>
+    </article>
+
+    <article class="case">
+      <div class="case-top"><h3>Estruturação de KPIs e OKRs para uma nova área de negócio</h3><span class="where">iFood</span></div>
+      <dl class="flow">
+        <div><dt class="p">Problema</dt><dd>Uma área recém-criada precisava de visibilidade sobre seus indicadores para acompanhar e atingir os OKRs.</dd></div>
+        <div><dt class="a">Abordagem</dt><dd>Estruturei do zero, junto com a liderança, a definição dos indicadores, as análises e os painéis de acompanhamento.</dd></div>
+        <div><dt class="r">Resultado</dt><dd>A área ganhou uma rotina de gestão orientada por dados e passou a acompanhar e mover os indicadores definidos como OKRs.</dd></div>
+      </dl>
+      <div class="tags"><span class="tag">KPIs</span><span class="tag">OKRs</span><span class="tag">BI</span><span class="tag">Dashboards</span></div>
+    </article>
+
+    <article class="case">
+      <div class="case-top"><h3>Estruturação do time de Inteligência de Mercado</h3><span class="where">Neotrust</span></div>
+      <dl class="flow">
+        <div><dt class="p">Problema</dt><dd>A empresa precisava de uma equipe dedicada a inteligência de mercado.</dd></div>
+        <div><dt class="a">Abordagem</dt><dd>Montei o time do zero: contratação, onboarding, priorização e feedback no dia a dia.</dd></div>
+        <div><dt class="r">Resultado</dt><dd>Equipe estruturada e em operação, com rotina de entregas para as áreas de negócio.</dd></div>
+      </dl>
+      <div class="tags"><span class="tag">Liderança</span><span class="tag">Gestão de pessoas</span><span class="tag">Inteligência de Mercado</span></div>
+    </article>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="sec-head">
+    <p class="eyebrow">Portfólio de BI e IA aplicada</p>
+    <h2>Projetos que construí</h2>
+    <p>Dashboards e soluções com IA generativa, separados por ferramenta. Cada projeto indica a origem: autoral, de workshop ou recriado a partir de tutorial. Todos usam dados públicos, fictícios ou de treinamento.</p>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Projetos por ferramenta">
+    <button role="tab" id="t-pbi" aria-controls="tab-pbi" aria-selected="true">Power BI <span>3</span></button>
+    <button role="tab" id="t-tab" aria-controls="tab-tab" aria-selected="false">Tableau <span>2</span></button>
+    <button role="tab" id="t-ia" aria-controls="tab-ia" aria-selected="false">IA generativa <span>5</span></button>
+  </div>
+  <div class="tabpanel" id="tab-pbi" role="tabpanel" aria-labelledby="t-pbi">
+    <div class="projects">
+    <article class="proj">
+      <figure class="shot" style="margin:0"><img src="img/pbi-faltas.jpg" alt="Painel Presença no Power BI: menu lateral, cards em tons pastel, taxa de falta por dia, infográfico por faixa etária, dia da semana e antecedência" loading="lazy" width="1434" height="808"></figure>
+      <div class="proj-text">
+        <p class="origin own">Autoral</p>
+        <p class="made">Power BI · DAX</p>
+        <h3>Faltas em consultas · risco e próxima melhor ação</h3>
+        <p>Painel de 4 páginas sobre 110 mil consultas da rede pública de Vitória (ES), ligado ao modelo de risco do projeto.</p>
+        <ul>
+          <li>Layout próprio ("Presença"): fundo desenhado, menu de navegação, cards com setas de variação e infográfico por faixa etária</li>
+          <li>Visão geral: taxa de falta por dia, antecedência, histórico e idade</li>
+          <li>O paradoxo do SMS e por que o efeito não pode ser medido</li>
+          <li>Agenda da semana com a ação recomendada para cada consulta</li>
+        </ul>
+        <div class="proj-links"><a href="https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9" target="_blank" rel="noopener">Abrir o dashboard →</a> <a href="https://github.com/jessicapmartins/previsao-faltas-consultas" target="_blank" rel="noopener">Ver o projeto →</a></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <figure class="shot" style="margin:0"><img src="img/pbi-campanhas.jpg" alt="Dashboard de campanhas no Power BI com investimento, receita, ROI, CTR, CPC e CPA por plataforma" loading="lazy" width="1296" height="718"></figure>
+      <div class="proj-text">
+        <p class="origin tut">Recriado a partir de tutorial</p>
+        <p class="made">Power BI</p>
+        <h3>Dashboard de campanhas de marketing</h3>
+        <p>Painel de performance de mídia paga em Facebook, Instagram, Google e LinkedIn.</p>
+        <ul>
+          <li>Investimento, receita, ROI, CTR, CPC e CPA</li>
+          <li>ROI e investimento por plataforma, conversões por região</li>
+          <li>Evolução de investimento e receita, com filtros por campanha e período</li>
+        </ul>
+        <div class="proj-links"><a href="https://app.powerbi.com/view?r=eyJrIjoiN2E2MTVhZGYtNzYxNi00ZDhiLWIyN2EtMTM2ZTQ4YTk5ZGEwIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9" target="_blank" rel="noopener">Abrir o dashboard →</a></div>
+      </div>
+    </article>
+
+    <article class="proj more">
+      <figure class="shot" style="margin:0"><img src="img/pbi-ecommerce.jpg" alt="Dashboard de e-commerce no Power BI com faturamento mensal, vendas por categoria e por canal" loading="lazy" width="732" height="410"></figure>
+      <div class="proj-text">
+        <p class="origin tut">Recriado a partir de tutorial</p>
+        <p class="made">Power BI</p>
+        <h3>Dashboard de e-commerce</h3>
+        <p>Painel de vendas de uma loja online de calçados, bolsas e acessórios.</p>
+        <ul>
+          <li>Faturamento mês a mês, pedidos, clientes e itens vendidos</li>
+          <li>Ranking de produtos por categoria com barras de valor</li>
+          <li>Vendas por canal: site e aplicativo</li>
+        </ul>
+        <div class="proj-links"><a href="https://app.powerbi.com/view?r=eyJrIjoiMTJlYjVkYzMtMWEwMy00ZWMyLTkzNDgtOTJkMWVkNGZlM2NkIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9" target="_blank" rel="noopener">Abrir o dashboard →</a></div>
+      </div>
+    </article>
+    </div>
+    <button class="btn more-btn" type="button" aria-expanded="false">Ver mais 1 →</button>
+  </div>
+  <div class="tabpanel" id="tab-tab" role="tabpanel" aria-labelledby="t-tab" hidden>
+    <div class="projects">
+    <article class="proj">
+      <figure class="shot" style="margin:0"><img src="img/tableau-olist.jpg" alt="Painel Tableau da Olist com KPIs, participação por segmento, receita por estado, receita mensal e ação de CRM" loading="lazy" width="1062" height="711"></figure>
+      <div class="proj-text">
+        <p class="origin own">Autoral</p>
+        <p class="made">Tableau</p>
+        <h3>Segmentação de clientes Olist</h3>
+        <p>Painel final do projeto de segmentação: 93 mil clientes de um marketplace em 4 segmentos, com a ação de CRM de cada um.</p>
+        <ul>
+          <li>Cards de KPI: clientes, receita, valor médio, recompra e nota</li>
+          <li>Receita mensal e por estado, participação por segmento</li>
+          <li>Filtros por segmento e estado</li>
+        </ul>
+        <div class="proj-links"><a href="https://public.tableau.com/views/Dash-Olist/PainelOlist-Segmentaodeclientes" target="_blank" rel="noopener">Abrir o painel →</a> <a href="https://github.com/jessicapmartins/segmentacao-clientes-olist" target="_blank" rel="noopener">Ver o projeto →</a></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <figure class="shot" style="margin:0"><img src="img/tableau-superstore.jpg" alt="Painel Tableau Superstore com vendas por categoria, mapa de calor por subcategoria e dispersão de vendas e lucro" loading="lazy" width="1557" height="632"></figure>
+      <div class="proj-text">
+        <p class="origin tut">Recriado a partir de tutorial</p>
+        <p class="made">Tableau</p>
+        <h3>Vendas e lucro por categoria</h3>
+        <p>Painel com a base de exemplo Superstore, do Tableau.</p>
+        <ul>
+          <li>Vendas e lucro por categoria, subcategoria e produto</li>
+        </ul>
+        <div class="proj-links"><a href="https://public.tableau.com/views/DashboardSuperstorebyCategory/DashSalesandProfitsbyCategorySub-CategoryandProduct" target="_blank" rel="noopener">Abrir o painel →</a></div>
+      </div>
+    </article>
+    </div>
+  </div>
+  <div class="tabpanel" id="tab-ia" role="tabpanel" aria-labelledby="t-ia" hidden>
+    <div class="projects">
+    <article class="proj">
+      <figure class="shot" style="margin:0"><img src="img/clinicas-aurora.jpg" alt="Painel de fluxo de caixa das Clínicas Aurora com KPIs, receita e despesas por mês e custo das faltas" loading="lazy" width="1300" height="820"></figure>
+      <div class="proj-text">
+        <p class="origin own">Autoral</p>
+        <p class="made">Claude · Chart.js · Vercel · dados sintéticos</p>
+        <h3>Clínicas Aurora: fluxo de caixa</h3>
+        <p>Painel de uma rede fictícia de três clínicas, com o custo das faltas calibrado pela base real do projeto de previsão de faltas. Construído com o Claude e publicado por mim na Vercel, com endereço próprio.</p>
+        <ul>
+          <li>Receita, despesas, resultado e DRE simplificada por unidade e período</li>
+          <li>Receita e margem perdidas com faltas, por mês, especialidade e dia da semana</li>
+          <li>Simulador de cenários: quanto vale reduzir as faltas, descontado o custo dos contatos</li>
+        </ul>
+        <div class="proj-links"><a href="https://clinicas-aurora.vercel.app/" target="_blank" rel="noopener">Abrir o dashboard →</a> <a href="https://github.com/jessicapmartins/dashboards-bi/tree/main/fluxo-caixa-clinicas" target="_blank" rel="noopener">Ver o código →</a></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <figure class="shot" style="margin:0"><img src="img/deck-faltas.jpg" alt="Slide da apresentação executiva com o infográfico de faltas por faixa etária e pelo histórico do paciente" loading="lazy" width="960" height="540"></figure>
+      <div class="proj-text">
+        <p class="origin own">Autoral</p>
+        <p class="made">Claude · Figma Slides</p>
+        <h3>Apresentação executiva · faltas em consultas</h3>
+        <p>Deck gerado a partir do painel de faltas: do tamanho do problema à ação recomendada para cada consulta, com notas do apresentador.</p>
+        <ul>
+          <li>Antecedência, perfil do paciente e o paradoxo do SMS</li>
+          <li>Modelo de risco e regra de próxima melhor ação, com próximos passos</li>
+        </ul>
+        <div class="proj-links"><a href="https://www.figma.com/slides/oxiDn0T2xjWyQlVPDGu9he" target="_blank" rel="noopener">Ver a apresentação →</a></div>
+      </div>
+    </article>
+
+    <article class="proj more">
+      <figure class="shot" style="margin:0"><img src="img/logistica.jpg" alt="Painel de logística RotaViva com entregas, prazo, atrasos e custos de frete" loading="lazy" width="1400" height="802"></figure>
+      <div class="proj-text">
+        <p class="origin wk">Projeto de workshop</p>
+        <p class="made">Claude · Lovable</p>
+        <h3>RotaViva: painel de logística</h3>
+        <p>Painel de entregas com camada de acesso por login, pensado para uso interno de uma operação.</p>
+        <ul>
+          <li>Entregas no prazo, atrasos, custo de frete e ocorrências</li>
+          <li>Visões por transportadora, rota e região</li>
+          <li>Destaques automáticos: onde agir primeiro</li>
+        </ul>
+        <p class="note">O acesso exige login. Acesso de demonstração sob pedido.</p>
+      </div>
+    </article>
+
+    <article class="proj more">
+      <figure class="shot" style="margin:0"><img src="img/doc-faltas.jpg" alt="Documentação técnica do modelo Power BI de faltas com arquitetura, diagrama do modelo e dicionário de dados" loading="lazy" width="1300" height="1340"></figure>
+      <div class="proj-text">
+        <p class="origin own">Autoral</p>
+        <p class="made">Claude · Python · Power BI (TMDL)</p>
+        <h3>Documentação do modelo Power BI de faltas</h3>
+        <p>Documentação técnica gerada por um script que lê os arquivos do projeto Power BI: estrutura, tipos e DAX vêm direto do modelo.</p>
+        <ul>
+          <li>Arquitetura, diagrama do modelo e dicionário de 46 colunas</li>
+          <li>Catálogo das 17 medidas DAX e das colunas calculadas</li>
+          <li>Decisões de modelagem, pontos de atenção e validação dos números</li>
+        </ul>
+        <div class="proj-links"><a href="https://claude.ai/artifact/NVBMomumL2gSB1UVCS4ktG" target="_blank" rel="noopener">Abrir a documentação →</a> <a href="https://github.com/jessicapmartins/previsao-faltas-consultas/tree/main/docs" target="_blank" rel="noopener">Ver o script →</a></div>
+      </div>
+    </article>
+
+    <article class="proj more">
+      <figure class="shot" style="margin:0"><img src="img/relatorio-faltas.jpg" alt="Primeira página do relatório executivo de faltas em consultas, com KPIs, resumo executivo, ponto de atenção e gráfico da taxa de falta por semana" loading="lazy" width="1075" height="932"></figure>
+      <div class="proj-text">
+        <p class="origin own">Autoral</p>
+        <p class="made">Claude · skill personalizada · Python</p>
+        <h3>Relatório executivo automatizado · faltas em consultas</h3>
+        <p>Uma skill que lê qualquer planilha Excel ou CSV e gera um relatório executivo em PDF. Evoluí a skill de fechamento do workshop para funcionar com qualquer tema e apliquei nas bases do painel de faltas (110 mil consultas).</p>
+        <ul>
+          <li>KPIs, resumo executivo, evolução semanal e ponto de atenção</li>
+          <li>Análise por tema com gráficos comparativos, conclusão e próximos passos</li>
+          <li>Checagem das projeções da base: a economia prevista pelo modelo foi recalculada com a taxa real de faltas</li>
+          <li>Fatos separados de hipóteses e lacunas dos dados declaradas</li>
+        </ul>
+        <div class="proj-links"><a href="relatorio-faltas-consultas.pdf" target="_blank" rel="noopener">Abrir o relatório (PDF) →</a></div>
+      </div>
+    </article>
+    </div>
+    <button class="btn more-btn" type="button" aria-expanded="false">Ver mais 3 →</button>
+  </div>
+</section>
+
+<section id="codigo">
+  <div class="sec-head">
+    <p class="eyebrow">Código e Machine Learning</p>
+    <h2>Da pergunta de negócio ao modelo</h2>
+    <p>Projetos completos, com código aberto no GitHub e dados públicos, seguindo as etapas do CRISP-DM: entendimento do problema, análise exploratória, preparação, modelagem e avaliação.</p>
+  </div>
+  <div class="code-grid">
+
+    <article class="repo">
+      <p class="made eyebrow">TCC · Pós FIA</p>
+      <h3>Previsão de acidentes graves na BR-381 (MG)</h3>
+      <p>Modelo que estima a probabilidade de um acidente ter feridos graves ou mortos, para apoiar a fiscalização e o acionamento de equipes de resgate. Base aberta da PRF com 4.605 ocorrências.</p>
+      <div class="steps">EDA em R <i>→</i> regressão logística <i>→</i> 6 algoritmos de ML <i>→</i> redes densas, CNN e LSTM <i>→</i> análise de custo</div>
+      <div class="metrics">
+        <div class="metric"><b>70%</b><span>sensibilidade</span></div>
+        <div class="metric"><b>68%</b><span>AUC</span></div>
+        <div class="metric"><b>3</b><span>abordagens: estatística, ML e DL</span></div>
+      </div>
+      <div class="tags"><span class="tag">R</span><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">CatBoost</span><span class="tag">XGBoost</span><span class="tag">Keras</span></div>
+      <div class="proj-links"><a href="https://github.com/jessicapmartins/tcc-acidentes-br381" target="_blank" rel="noopener">Ver código no GitHub →</a></div>
+    </article>
+
+    <article class="repo">
+      <p class="made eyebrow">NLP · IA generativa</p>
+      <h3>Análise de sentimento de avaliações do Spotify</h3>
+      <p>Classificação de 61.594 avaliações do app como positivas ou negativas e um Transformer, feito do zero, que traduz as avaliações do inglês para o português. Projeto em grupo.</p>
+      <div class="steps">Processamento de texto com spaCy <i>→</i> 6 versões de rede <i>→</i> LSTM <i>→</i> Transformer</div>
+      <div class="metrics">
+        <div class="metric"><b>50% → 85%</b><span>acurácia, do 1º ao modelo final</span></div>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">spaCy</span><span class="tag">TensorFlow</span><span class="tag">LSTM</span><span class="tag">Transformer</span></div>
+      <div class="proj-links"><a href="https://github.com/jessicapmartins/analise-sentimento-spotify" target="_blank" rel="noopener">Ver código no GitHub →</a></div>
+    </article>
+
+    <article class="repo">
+      <p class="made eyebrow">Não supervisionado · ponta a ponta</p>
+      <h3>Segmentação de clientes de e-commerce (Olist)</h3>
+      <p>93 mil clientes de um marketplace brasileiro agrupados em 4 segmentos para orientar o CRM. Dados públicos e anonimizados da Olist, carregados em SQL.</p>
+      <div class="steps">10 perguntas de negócio em SQL <i>→</i> EDA <i>→</i> RFM + K-Means <i>→</i> autoencoder <i>→</i> personas com IA generativa <i>→</i> painel no Tableau</div>
+      <div class="metrics">
+        <div class="metric"><b>57,5%</b><span>da receita vem de 30% dos clientes</span></div>
+        <div class="metric"><b>3%</b><span>taxa de recompra</span></div>
+        <div class="metric"><b>4</b><span>segmentos com ação de CRM</span></div>
+      </div>
+      <div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Keras</span><span class="tag">Gemini</span><span class="tag">Tableau</span></div>
+      <div class="proj-links"><a href="https://github.com/jessicapmartins/segmentacao-clientes-olist" target="_blank" rel="noopener">Ver código no GitHub →</a> <a href="https://public.tableau.com/views/Dash-Olist/PainelOlist-Segmentaodeclientes" target="_blank" rel="noopener">Abrir o painel →</a></div>
+    </article>
+
+    <article class="repo">
+      <p class="made eyebrow">Supervisionado · ponta a ponta</p>
+      <h3>Previsão de faltas em consultas médicas</h3>
+      <p>Modelo de risco de falta para 110 mil consultas da rede pública de Vitória (ES) e uma regra de próxima melhor ação que escolhe, para cada consulta, entre lembrete, ligação, reconfirmação ou encaixe.</p>
+      <div class="steps">SQL com funções de janela <i>→</i> EDA <i>→</i> Gradient Boosting e rede densa <i>→</i> regra de custo por ação <i>→</i> textos com IA generativa <i>→</i> Power BI</div>
+      <div class="metrics">
+        <div class="metric"><b>0,73</b><span>ROC-AUC na semana de teste</span></div>
+        <div class="metric"><b>38%</b><span>das faltas nos 20% de maior risco</span></div>
+        <div class="metric"><b>-11,5%</b><span>no custo das faltas com a regra de ação</span></div>
+      </div>
+      <div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Keras</span><span class="tag">Gemini</span><span class="tag">Power BI</span></div>
+      <div class="proj-links"><a href="https://github.com/jessicapmartins/previsao-faltas-consultas" target="_blank" rel="noopener">Ver código no GitHub →</a> <a href="https://app.powerbi.com/view?r=eyJrIjoiODA0MjQyYzYtNTMwOC00ZGM0LTgxYjUtOTMyMzY2ZjBhNjYzIiwidCI6IjU4NTQwODYwLTQzNDgtNDQwMC05NjI3LTlmMTA4MWNiYWFjMiJ9" target="_blank" rel="noopener">Abrir o painel →</a></div>
+    </article>
+
+  </div>
+</section>
+
+<section id="stack">
+  <div class="sec-head">
+    <p class="eyebrow">Ferramentas</p>
+    <h2>O que uso no dia a dia</h2>
+  </div>
+  <div class="stack">
+    <div><h3>Dados e engenharia</h3><div class="tags"><span class="tag">SQL</span><span class="tag">Snowflake</span><span class="tag">Databricks</span><span class="tag">Airflow</span></div></div>
+    <div><h3>Modelagem</h3><div class="tags"><span class="tag">Python</span><span class="tag">R</span><span class="tag">Jupyter</span><span class="tag">VS Code</span><span class="tag">Clusterização</span><span class="tag">KNN</span><span class="tag">XGBoost</span><span class="tag">Deep Learning</span><span class="tag">NLP</span></div></div>
+    <div><h3>Visualização</h3><div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Tableau</span><span class="tag">Excel</span></div></div>
+    <div><h3>IA generativa</h3><div class="tags"><span class="tag">Claude</span><span class="tag">GPT</span><span class="tag">Lovable</span><span class="tag">Vercel</span><span class="tag">Figma</span></div></div>
+  </div>
+</section>
+
+<section id="formacao">
+  <div class="sec-head">
+    <p class="eyebrow">Formação</p>
+    <h2>Formação e certificações</h2>
+  </div>
+  <div class="edu">
+    <div class="edu-row"><time>set/2026</time><div><b>Workshop IA para Análise de Dados</b><span>Load EdTech · 16 h</span></div></div>
+    <div class="edu-row"><time>set/2026</time><div><b>Intensivão de Claude</b><span>Hashtag Treinamentos · 8 h</span></div></div>
+    <div class="edu-row"><time>set/2026</time><div><b>Jornada Inteligência Artificial</b><span>Hashtag Treinamentos · 8 h</span></div></div>
+    <div class="edu-row"><time>2026 – atual</time><div><b>Inglês</b><span>Richards · em curso</span></div></div>
+    <div class="edu-row"><time>2023 – 2024</time><div><b>Pós-graduação em Analytics e IA – Data Science</b><span>FIA Business School</span></div></div>
+    <div class="edu-row"><time>2010 – 2013</time><div><b>Administração de Empresas</b><span>FITO – Faculdade Instituto Tecnológico de Osasco</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>Aberta a oportunidades em dados, analytics e IA aplicada.</p>
+  <a class="btn primary" href="https://www.linkedin.com/in/jessica-oliveira-martins/" target="_blank" rel="noopener">Falar comigo no LinkedIn</a>
+</footer>
+
+</div>
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
+  function show(t){tabs.forEach(function(b){var on=b===t;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;document.getElementById(b.getAttribute('aria-controls')).hidden=!on;});}
+  tabs.forEach(function(b,i){b.tabIndex=i?-1:0;b.addEventListener('click',function(){show(b);});
+    b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(d){var n=tabs[(i+d+tabs.length)%tabs.length];n.focus();show(n);}});});
+  [].forEach.call(document.querySelectorAll('.more-btn'),function(btn){var lbl=btn.textContent;btn.addEventListener('click',function(){var p=btn.closest('.tabpanel');var o=p.classList.toggle('open');btn.setAttribute('aria-expanded',o);btn.textContent=o?'Ver menos ↑':lbl;});});
+})();
+</script>
+</body>
+</html>
