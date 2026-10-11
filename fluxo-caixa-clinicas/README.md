@@ -2,6 +2,8 @@
 
 Painel de fluxo de caixa de uma **rede fictícia de três clínicas**, com foco no quanto as faltas às consultas custam e no quanto vale reduzi-las.
 
+🔗 **[Abrir o dashboard](https://clinicas-aurora.vercel.app/)** (publicado na Vercel)
+
 > **Projeto autoral com dados sintéticos.** A empresa e os números são inventados por um script com semente fixa. A taxa de falta foi calibrada pela base real do projeto [previsão de faltas em consultas](https://github.com/jessicapmartins/previsao-faltas-consultas) (20,2% em 110 mil consultas).
 
 ## O que o painel mostra
