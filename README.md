@@ -61,13 +61,6 @@ Painel com a base pública *Superstore*.
 
 🔗 [Abrir no Tableau Public](https://public.tableau.com/views/DashboardSuperstorebyCategory/DashSalesandProfitsbyCategorySub-CategoryandProduct)
 
-### KPIs de acompanhamento
-Painel de KPIs desenvolvido como case de teste técnico: migração de clientes entre clusters, clientes em queda e tendências mensais.
-
-[![Dashboard de KPIs de acompanhamento no Tableau](https://public.tableau.com/static/images/KP/KPIdeAcompanhamento/KPIdeAcompanhamento/1.png)](https://public.tableau.com/views/KPIdeAcompanhamento/KPIdeAcompanhamento)
-
-🔗 [Abrir no Tableau Public](https://public.tableau.com/views/KPIdeAcompanhamento/KPIdeAcompanhamento)
-
 ---
 
 ## Soluções com IA generativa
